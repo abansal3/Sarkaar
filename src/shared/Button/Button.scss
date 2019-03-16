@@ -10,7 +10,29 @@
     outline: none;
     font-size: 20px;
     color: #445870;
-    margin-top: 50px;
+
+    &:hover {
+        background: #445870;
+        color: white;
+        cursor: pointer;
+        transition: background-color .25s ease-in-out;
+        -moz-transition: background-color .25s ease-in-out;
+        -webkit-transition: background-color .25s ease-in-out;
+    }
+}
+
+.secondary-button {
+    width: 150px;
+    height: 60px;
+    border-bottom-left-radius: 30px;
+    border-top-right-radius: 30px;
+    background: white;
+    border: 1px solid #445870;
+    font-family: europa;
+    font-weight: 200;
+    outline: none;
+    font-size: 15px;
+    color: #445870;
 
     &:hover {
         background: #445870;

@@ -35,6 +35,7 @@ class SelectBox extends Component {
                     })
                 }}
                 placeholder={this.props.placeholder}
+                isSearchable={this.props.isSearchable || false}
                 className="select"
                 classNamePrefix="react-select"
             />

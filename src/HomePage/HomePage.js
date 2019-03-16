@@ -1,19 +1,50 @@
 import React, { Component } from 'react';
+import Modal from 'react-modal';
+
 import './HomePage.scss';
 
 import Header from '../Header/Header';
 import Button from '../shared/Button/Button';
 
+Modal.setAppElement('#root');
+
 class HomePage extends Component {
 
     constructor(props) {
         super(props);
-        this.handleScroll = this.handleScroll.bind(this);
-        this.navigateToSection = this.navigateToSection.bind(this);
+        
         this.state = {
             secondaryNav: [true, false, false],
-            headerPosition: 'sticky'
+            headerPosition: 'sticky',
+            modalIsOpen: {
+                getStarted: false,
+                contactUs: false
+            }
         }
+
+        this.handleScroll = this.handleScroll.bind(this);
+        this.navigateToSection = this.navigateToSection.bind(this);
+
+        this.openModal = this.openModal.bind(this);
+        this.afterOpenModal = this.afterOpenModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
+
+    openModal(modal) {
+        let currentModalStates = this.state.modalIsOpen;
+        currentModalStates[modal] = true;
+        this.setState({ modalIsOpen: currentModalStates })
+      }
+    
+    afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        // this.subtitle.style.color = '#f00';
+    }
+
+    closeModal(modal) {
+        let currentModalStates = this.state.modalIsOpen;
+        currentModalStates[modal] = false;
+        this.setState({ modalIsOpen: currentModalStates })
     }
 
     navigateToSection (tab) {
@@ -58,12 +89,36 @@ class HomePage extends Component {
         return (
             <div>
                 <Header position={this.state.headerPosition} />
+                <Modal
+                    isOpen={this.state.modalIsOpen.getStarted}
+                    onAfterOpen={this.afterOpenModal}
+                    onRequestClose={() => this.closeModal('getStarted')}
+                    contentLabel="Get Started Modal"
+                    className="modal-content"
+                    overlayClassName="modal-overlay"
+                    >
+
+                    <h2 ref={subtitle => this.subtitle = subtitle}>Get Started</h2>
+                    <button onClick={() => this.closeModal('getStarted')}>close</button>
+                </Modal>
+                <Modal
+                    isOpen={this.state.modalIsOpen.contactUs}
+                    onAfterOpen={this.afterOpenModal}
+                    onRequestClose={() => this.closeModal('contactUs')}
+                    contentLabel="Contact Us Modal"
+                    className="modal-content"
+                    overlayClassName="modal-overlay"
+                    >
+
+                    <h2 ref={subtitle => this.subtitle = subtitle}>Contact Us</h2>
+                    <button onClick={() => this.closeModal('contactUs')}>close</button>
+                </Modal>
                 <section id="landing">
                     <div className="container">
                         <div id="landing-text">
                             <h1>Bharat is growing. We need to keep up</h1>
+                            <Button text="Get Started" className="primary-button" onClick={() => this.openModal('getStarted')} />
                         </div>
-                        <Button text="Get Started" className="primary-button" onClick={null} />
                         <div id="landing-graphic">
                             <img src="/img/red_fort.svg" />
                         </div>
@@ -124,7 +179,7 @@ class HomePage extends Component {
                                 <br></br><br></br>
                                 This has led to uninformed voters around the world. For India to build upon a stable democracy, information must be both accessible and digestible. 
                                 </p>
-                                <Button text="Read More" className="primary-button" />
+                                <Button text="Read More" className="secondary-button" />
                             </div>
                             <div className="content-image">
                                 <img src='/img/globe.svg' />
@@ -152,8 +207,8 @@ class HomePage extends Component {
                                 Interested in helping?
                                 </p>
                                 <div>
-                                    <Button id="contact-us-button" text="Contact Us" className="primary-button"/>
-                                    <Button id="github-button" text="Explore GitHub" className="primary-button"/>
+                                    <Button id="contact-us-button" text="Contact Us" className="secondary-button" onClick={() => this.openModal('contactUs')}/>
+                                    <Button id="github-button" text="Explore GitHub" className="secondary-button"/>
                                 </div>
                             </div>
                         </div>

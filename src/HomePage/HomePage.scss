@@ -4,10 +4,37 @@
     width: 80%;
     height: 100%;
     margin: auto;
+    max-width: 1440px;
+}
+
+.modal-content {
+    width: 50%;
+    height: 50%;
+    background: white;
+    border: 1px solid #E0E7EE;
+    box-shadow: 0px 1px 5px 0px rgba(194,194,194,0.5);
+    border-radius: 3px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    outline: none;
+    padding: 20px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    background: rgba(255,255,255,0.8);
 }
 
 section#landing {
     height: 80vh;
+    max-height: 800px;
     
     .container {
         margin: auto;
@@ -17,21 +44,26 @@ section#landing {
         align-items: center;
 
         div#landing-text {
-            margin-top: 5%;
             width: 100%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
 
             h1 {
                 text-align: center;
                 font-family: europa;
                 font-weight: 500;
-                font-size: 40px;
+                font-size: 2em;
                 color: #445870;
+                margin-bottom: 10%;
             }
         }
 
         div#landing-graphic {
             width: 100%;
-            height: 50%;
+            height: 40%;
             position: absolute;
             bottom: 0;
 
@@ -90,6 +122,7 @@ div#secondary-nav {
 section#main-content {
     div.content {
         height: 90vh;
+        max-height: 800px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -119,18 +152,11 @@ section#main-content {
                     font-size: 15px;
                     color: #445870;
                     line-height: 50px;
-                }
-
-                .primary-button {
-                    margin-top: 50px;
+                    margin-bottom: 20px;
                 }
 
                 #contact-us-button {
                     margin-right: 30px;
-                }
-
-                #contact-us-button, #github-button {
-                    width: 200px;
                 }
             }
         }
