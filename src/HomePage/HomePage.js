@@ -97,9 +97,14 @@ class HomePage extends Component {
                     className="modal-content"
                     overlayClassName="modal-overlay"
                     >
-
-                    <h2 ref={subtitle => this.subtitle = subtitle}>Get Started</h2>
-                    <button onClick={() => this.closeModal('getStarted')}>close</button>
+                    <img className="modal-close-button" src="/img/x.svg" onClick={() => this.closeModal('getStarted')} />
+                    <h2>Welcome to Sarkaar!</h2>
+                    <img className="modal-content-image" src="/img/greeting.svg" />
+                    <p>Thanks for checking us out! We’re not quite ready yet.<br></br>Leave your email below to join our early adopters list.</p>
+                    <div id="email-form-container">
+                        <input placeholder="Your Email" className="email-form-input"></input>
+                        <Button text="Submit" className="filled-button" />
+                    </div>
                 </Modal>
                 <Modal
                     isOpen={this.state.modalIsOpen.contactUs}
@@ -248,6 +253,8 @@ class HomePage extends Component {
                                 <div>
                                     <h4>SHARE</h4>
                                     <ul>
+                                        <li><img src="/img/f.svg" /></li>
+                                        <li><img src="/img/bird.svg" /></li>
                                         <li><img src="/img/slack.svg" /></li>
                                         <li><img src="/img/mail.svg" /></li>
                                     </ul>

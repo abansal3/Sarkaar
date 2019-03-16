@@ -65,9 +65,10 @@ class Header extends Component {
                             {value: "UP", label: "Uttar Pradesh"},
                             {value: "WB", label: "West Bengal"}
                         ]}
+                        isClearable
                         isSearchable
                         width= '200px'
-                        placeholder="State" />
+                        placeholder="Location" />
                     </div>
                     <div className="right">
                         <SelectBox 

@@ -1,3 +1,9 @@
+button {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 .primary-button {
     width: 250px;
     height: 70px;
@@ -14,7 +20,6 @@
     &:hover {
         background: #445870;
         color: white;
-        cursor: pointer;
         transition: background-color .25s ease-in-out;
         -moz-transition: background-color .25s ease-in-out;
         -webkit-transition: background-color .25s ease-in-out;
@@ -37,9 +42,22 @@
     &:hover {
         background: #445870;
         color: white;
-        cursor: pointer;
         transition: background-color .25s ease-in-out;
         -moz-transition: background-color .25s ease-in-out;
         -webkit-transition: background-color .25s ease-in-out;
     }
+}
+
+.filled-button {
+    width: 150px;
+    height: 60px;
+    border-bottom-left-radius: 30px;
+    border-top-right-radius: 30px;
+    background: #445870;
+    border: 1px solid #E0E7EE;
+    font-family: europa;
+    font-weight: 200;
+    outline: none;
+    font-size: 15px;
+    color: white;
 }
