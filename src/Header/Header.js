@@ -1,11 +1,33 @@
 import React, {Component} from 'react';
 import './Header.scss';
+import ReactGA from 'react-ga';
 
 import SelectBox from '../shared/SelectBox/SelectBox';
 
 class Header extends Component {
     constructor(props) {
         super(props);
+
+        this.handleTopicSelect = this.handleTopicSelect.bind(this);
+        this.handleLocationSelect = this.handleLocationSelect.bind(this);
+    }
+
+    handleTopicSelect(selectedOption) {
+        console.log("Topic selected:", selectedOption.label)
+        ReactGA.event({
+            category: 'Topic',
+            action: 'Topic Selected',
+            label: selectedOption.label
+        });
+    }
+
+    handleLocationSelect(selectedOption) {
+        console.log("Location selected:", selectedOption.label)
+        ReactGA.event({
+            category: 'Location',
+            action: 'Location Selected',
+            label: selectedOption.label
+        });
     }
     
     render () {
@@ -24,7 +46,9 @@ class Header extends Component {
                             { value: 'macro-trends', label: 'Macro Trends' }
                         ]}
                         width= '200px'
-                        placeholder="Pick Your Topic" />
+                        placeholder="Pick Your Topic"
+                        selectedOption={this.handleTopicSelect}
+                        />
                         <img id="left-right" src="/img/left_right_arrow.svg" alt="Divider" />
                         <SelectBox 
                         options={[
@@ -68,7 +92,9 @@ class Header extends Component {
                         isClearable
                         isSearchable
                         width= '200px'
-                        placeholder="Location" />
+                        placeholder="Location" 
+                        selectedOption={this.handleLocationSelect}
+                        />
                     </div>
                     <div className="right">
                         <SelectBox 

@@ -9,7 +9,7 @@
 
 .modal-content {
     width: 40%;
-    height: 52%;
+    height: 60%;
     background: white;
     border: 1px solid #E0E7EE;
     box-shadow: 0px 1px 5px 0px rgba(194,194,194,0.5);
@@ -20,60 +20,6 @@
     transform: translate(-50%, -50%);
     outline: none;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    font-family: europa;
-
-    h2 {
-        font-weight: 300;
-        font-size: 30px;
-    }
-
-    img.modal-content-image {
-        height: 120px;
-    }
-
-    p {
-        font-weight: 200;
-        font-size: 14px;
-        line-height: 36px;
-    }
-
-    div#email-form-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 42px;
-        width: 60%;
-        position: relative;
-
-        input {
-            background: white;
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
-            border: 1px solid #E0E7EE;
-            width: 100%;
-            overflow: visible;
-            height: 100%;
-            border-top-right-radius: 45.5px;
-            padding-left: 10px;
-            outline: none;
-
-            &::placeholder {
-                font-family: europa;
-                color: rgba(68,88,112,0.5);
-            }
-        }
-
-        button.filled-button {
-            position: absolute;
-            right: 0;
-            width: 117px;
-            height: 100%;
-        }
-    }
 
     img.modal-close-button {
         position: absolute;
@@ -82,6 +28,101 @@
 
         &:hover {
             cursor: pointer;
+        }
+    }
+
+    div.container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        font-family: europa;
+        
+        h2 {
+            font-weight: 300;
+            font-size: 30px;
+        }
+
+        h3 {
+            font-weight: 300;
+            font-size: 25px;
+        }
+    
+        img.modal-content-image {
+            height: 120px;
+        }
+    
+        p {
+            font-weight: 200;
+            font-size: 15px;
+            line-height: 36px;
+        }
+
+        div#modal-share-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 60%;
+
+            img {
+                height: 25px;
+            }
+        }
+    
+        div#modal-email-form-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 42px;
+            width: 80%;
+            position: relative;
+    
+            input {
+                overflow: visible;
+                border-top-right-radius: 45.5px;
+                border-bottom-right-radius: 0px;
+
+                #contact-us-email {
+                    width: 50%;
+                }
+            }
+    
+            button.filled-button {
+                position: absolute;
+                right: 0;
+                width: 117px;
+                height: 100%;
+            }
+        }
+
+        div#modal-contact-us-form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            height: 80%;
+            justify-content: space-around;
+            width: 100%;
+            position: relative;
+    
+            input {
+                height: 42px;
+
+                &#contact-us-email {
+                    width: 50%;
+                }
+            }
+
+            textarea {
+                height: 100px;
+                max-height: 40%;
+            }
+    
+            button#contact-us-submit {
+                width: 40%;
+                height: 50px;
+                margin: 0 auto 0 auto;
+            }
         }
     }
 }
@@ -284,6 +325,10 @@ footer {
 
         h4 {
             margin-bottom: 5px;
+        }
+
+        li {
+            font-weight: 100;
         }
 
         div.footer-table-column {

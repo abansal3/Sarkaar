@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import { withCookies } from 'react-cookie'
+import ReactGA from 'react-ga';
+import 'autotrack/lib/plugins/max-scroll-tracker';
+
 import './App.scss';
 
 import HomePage from './HomePage/HomePage';
+
+ReactGA.initialize('UA-136434890-1', {
+  cookieDomain: 'auto',
+  // debug: true
+});
+
+ReactGA.plugin.require('maxScrollTracker');
 
 class App extends Component {
   constructor(props) {
@@ -11,14 +22,12 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path='/' component={ HomePage } />
-          <Redirect from='*' to='/' />
-        </Switch>
-      </BrowserRouter>
+      <Switch>
+        <Route exact path='/' render={() => (<HomePage cookies={this.props.cookies}/>)} />
+        <Redirect from='*' to='/' />
+      </Switch>
     );
   }
 };
 
-export default App;
+export default withCookies(App);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
+import ReactGA, {OutboundLink} from 'react-ga';
 
 import './HomePage.scss';
 
@@ -12,6 +13,8 @@ class HomePage extends Component {
 
     constructor(props) {
         super(props);
+
+        this.cookies = props.cookies;
         
         this.state = {
             secondaryNav: [true, false, false],
@@ -19,8 +22,19 @@ class HomePage extends Component {
             modalIsOpen: {
                 getStarted: false,
                 contactUs: false
+            },
+            getStartedModal: {
+                email: ''
+            },
+            contactUsModal: {
+                email: '',
+                subject: '',
+                body: ''
             }
         }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.submitEmail = this.submitEmail.bind(this);
 
         this.handleScroll = this.handleScroll.bind(this);
         this.navigateToSection = this.navigateToSection.bind(this);
@@ -28,13 +42,46 @@ class HomePage extends Component {
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+    } 
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.handleScroll);
+        ReactGA.pageview('/');
     }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll);
+    }
+
+    /*
+    *
+    * Modals
+    * 
+    */
 
     openModal(modal) {
         let currentModalStates = this.state.modalIsOpen;
         currentModalStates[modal] = true;
-        this.setState({ modalIsOpen: currentModalStates })
-      }
+        this.setState({ modalIsOpen: currentModalStates });
+        switch(modal) {
+            case 'getStarted':
+                ReactGA.event({
+                category: 'Button',
+                action: 'Clicked Get Started Button',
+                label: 'Get Started'
+            });
+                break;
+            case 'contactUs':
+                ReactGA.event({
+                    category: 'Button',
+                    action: 'Clicked Contact Us Button',
+                    label: 'Contact Us'
+                });
+                break;
+            default:
+                break;
+        }
+    }
     
     afterOpenModal() {
         // references are now sync'd and can be accessed.
@@ -47,20 +94,83 @@ class HomePage extends Component {
         this.setState({ modalIsOpen: currentModalStates })
     }
 
-    navigateToSection (tab) {
-        let secondaryNav = [false, false, false];
-        secondaryNav[tab] = true;
-        this.setState({ secondaryNav });
-        window.scrollTo(0, this.refs[tab].offsetTop - (window.innerHeight * 0.15));
-    }
-    
-    componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll);
+    /*
+    *
+    * Form Control
+    * 
+    */
+
+    handleChange(event, modal, property) {
+        switch (modal) {
+            case 'getStarted':
+                let getStartedModal = this.state.getStartedModal;
+                // Track when user starts entering email
+                if (event.target.value.length == 1 && getStartedModal.email.length == 0) {
+                    ReactGA.event({
+                        category: 'User',
+                        action: 'Started entering email',
+                        label: 'Get Started Modal'
+                    });
+                }
+                getStartedModal[property] = event.target.value;
+                this.setState({getStartedModal});
+                break;
+            case 'contactUs':
+                let contactUsModal = this.state.contactUsModal;
+                contactUsModal[property] = event.target.value;
+                this.setState({contactUsModal});
+                break;
+            default:
+                break;
+        }
     }
 
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
+    submitEmail() {
+        this.cookies.set('emailSubmitted', true);
+        ReactGA.event({
+            category: 'User',
+            action: 'Submitted email',
+            label: 'Get Started Modal'
+        });
     }
+
+    checkIfAlreadySignedUp() {
+        if(this.cookies.get('emailSubmitted') == 'true') {
+            return (
+                <div className="container">
+                    <h3>We’ll let you know when it’s ready</h3>
+                    <img className="modal-content-image" src="/img/development.svg" />
+                    <p>In the meantime, help us spread the word:</p>
+                    <div id="modal-share-container">
+                        <img className="modal-share-icon" src="/img/f-2.svg" />
+                        <img className="modal-share-icon" src="/img/bird-2.svg" />
+                        <img className="modal-share-icon" src="/img/mail-2.svg" />
+                        <img className="modal-share-icon" src="/img/slack-2.svg" />
+                        <img className="modal-share-icon" src="/img/whatsapp.svg" />
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className="container">
+                    <h2>Welcome to Sarkaar!</h2>
+                    <img className="modal-content-image" src="/img/greeting.svg" />
+                    <p>Thanks for checking us out! We’re not quite ready yet.<br></br>Leave your email below to join our early adopters list.</p>
+                    <div id="modal-email-form-container">
+                        <input placeholder="Your Email" className="input modal-email-form-input" value={this.state.getStartedModal.email} onChange={(event) => this.handleChange(event, 'getStarted','email')} />
+                        <Button text="Submit" className="filled-button" onClick={this.submitEmail}/>
+                    </div>
+                </div>
+            )
+        }
+        
+    }
+
+    /*
+    *
+    * Scroll Behavior
+    * 
+    */
 
     handleScroll() {
         let scrollPosition = document.documentElement.scrollTop;
@@ -85,6 +195,13 @@ class HomePage extends Component {
         }
     }
 
+    navigateToSection (tab) {
+        let secondaryNav = [false, false, false];
+        secondaryNav[tab] = true;
+        this.setState({ secondaryNav });
+        window.scrollTo(0, this.refs[tab].offsetTop - (window.innerHeight * 0.15));
+    }
+
     render() {
         return (
             <div>
@@ -98,13 +215,7 @@ class HomePage extends Component {
                     overlayClassName="modal-overlay"
                     >
                     <img className="modal-close-button" src="/img/x.svg" onClick={() => this.closeModal('getStarted')} />
-                    <h2>Welcome to Sarkaar!</h2>
-                    <img className="modal-content-image" src="/img/greeting.svg" />
-                    <p>Thanks for checking us out! We’re not quite ready yet.<br></br>Leave your email below to join our early adopters list.</p>
-                    <div id="email-form-container">
-                        <input placeholder="Your Email" className="email-form-input"></input>
-                        <Button text="Submit" className="filled-button" />
-                    </div>
+                    {this.checkIfAlreadySignedUp()}
                 </Modal>
                 <Modal
                     isOpen={this.state.modalIsOpen.contactUs}
@@ -114,9 +225,16 @@ class HomePage extends Component {
                     className="modal-content"
                     overlayClassName="modal-overlay"
                     >
-
-                    <h2 ref={subtitle => this.subtitle = subtitle}>Contact Us</h2>
-                    <button onClick={() => this.closeModal('contactUs')}>close</button>
+                        <img className="modal-close-button" src="/img/x.svg" onClick={() => this.closeModal('contactUs')} />
+                        <div className="container">
+                            <h3>Tell us what you think</h3>
+                            <div id="modal-contact-us-form-container">
+                                <input id="contact-us-email" placeholder="Your Email" className="input" value={this.state.contactUsModal.email} onChange={(event) => this.handleChange(event, 'contactUs','email')} />
+                                <input id="contact-us-subject" placeholder="Subject" className="input" value={this.state.contactUsModal.subject} onChange={(event) => this.handleChange(event, 'contactUs','subject')} />
+                                <textarea value={this.state.contactUsModal.body} onChange={(event) => this.handleChange(event, 'contactUs','body')} />
+                                <Button id="contact-us-submit" text="Submit" className="filled-button" onClick={this.submitEmail} />
+                            </div>
+                        </div>
                 </Modal>
                 <section id="landing">
                     <div className="container">
@@ -184,7 +302,12 @@ class HomePage extends Component {
                                 <br></br><br></br>
                                 This has led to uninformed voters around the world. For India to build upon a stable democracy, information must be both accessible and digestible. 
                                 </p>
-                                <Button text="Read More" className="secondary-button" />
+                                <OutboundLink
+                                eventLabel="Read More Button"
+                                to="https://medium.com/@arpitbansal"
+                                target="_blank">
+                                    <Button text="Read More" className="secondary-button" />
+                                </OutboundLink>
                             </div>
                             <div className="content-image">
                                 <img src='/img/globe.svg' />
@@ -213,7 +336,12 @@ class HomePage extends Component {
                                 </p>
                                 <div>
                                     <Button id="contact-us-button" text="Contact Us" className="secondary-button" onClick={() => this.openModal('contactUs')}/>
-                                    <Button id="github-button" text="Explore GitHub" className="secondary-button"/>
+                                    <OutboundLink
+                                    eventLabel="Explore Github Button"
+                                    to="https://github.com/abansal3/Sarkaar"
+                                    target="_blank">
+                                        <Button id="github-button" text="Explore GitHub" className="secondary-button"/>
+                                    </OutboundLink>
                                 </div>
                             </div>
                         </div>
