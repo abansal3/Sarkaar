@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import ReactGA, {OutboundLink} from 'react-ga';
+import axios from 'axios';
 
 import './HomePage.scss';
 
@@ -186,7 +187,7 @@ class HomePage extends Component {
             let secondaryNav = [false, false, false];
             secondaryNav[1] = true;
             this.setState({ secondaryNav });
-        } else if ((scrollPosition + 300) >= HowDoesThisWork) {
+        } else if ((scrollPosition) >= HowDoesThisWork) {
             let secondaryNav = [false, false, false];
             secondaryNav[2] = true;
             this.setState({ secondaryNav });
@@ -239,11 +240,11 @@ class HomePage extends Component {
                 <section id="landing">
                     <div className="container">
                         <div id="landing-text">
-                            <h1>Bharat is growing. We need to keep up</h1>
+                            <h1>Bharat is growing. We need to keep up.</h1>
                             <Button text="Get Started" className="primary-button" onClick={() => this.openModal('getStarted')} />
                         </div>
                         <div id="landing-graphic">
-                            <img src="/img/red_fort.svg" />
+                            {/* <img src="/img/red_fort.svg" /> */}
                         </div>
                     </div>
                 </section>
@@ -277,7 +278,8 @@ class HomePage extends Component {
                             <div className="content-text">
                                 <p>
                                 Sarkaar is a <b>data driven dashboard for the world’s largest democracy</b>. We aim to provide <b>transparency</b>, <b>information</b> and <b>macro level insight</b> to enable an educated electorate of the 21st Century.
-                                <br></br><br></br>
+                                </p>
+                                <p>
                                 The platform is primarily structured around two aspects:
                                     <ul>
                                         <li>Topics</li> 
@@ -299,7 +301,8 @@ class HomePage extends Component {
                             <div className="content-text">
                                 <p>
                                 We’re living through a revolutionary time in the timescale of human evolution. Information today is everywhere and nowhere at the same time. But even with all the information out there, there simply isn’t a digestible structure for everyone to make sense of their surrounding. 
-                                <br></br><br></br>
+                                </p>
+                                <p>
                                 This has led to uninformed voters around the world. For India to build upon a stable democracy, information must be both accessible and digestible. 
                                 </p>
                                 <OutboundLink
@@ -329,9 +332,11 @@ class HomePage extends Component {
                             <div className="content-text">
                                 <p>
                                 Collaboration has been key to some of the greatest human achievements. We are no different.
-                                <br></br><br></br>
+                                </p>
+                                <p>
                                 Sarkaar is built and managed by a passionate group of technologists, political enthusiasts and proud citizens of India. The project is open source and we welcome all contributions.
-                                <br></br><br></br>
+                                </p>
+                                <p>
                                 Interested in helping?
                                 </p>
                                 <div>

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "autotrack": "^2.4.1",
+    "axios": "^0.18.0",
     "intersection-observer": "^0.5.1",
     "node-sass": "^4.11.0",
     "react": "^16.8.4",

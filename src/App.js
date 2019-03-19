@@ -7,6 +7,7 @@ import 'autotrack/lib/plugins/max-scroll-tracker';
 import './App.scss';
 
 import HomePage from './HomePage/HomePage';
+import Overview from './Platform/Overview/Overview';
 
 ReactGA.initialize('UA-136434890-1', {
   cookieDomain: 'auto',
@@ -24,6 +25,7 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path='/' render={() => (<HomePage cookies={this.props.cookies}/>)} />
+        {/* <Route exact path='/overview' render={() => (<Overview cookies={this.props.cookies}/>)} /> */}
         <Redirect from='*' to='/' />
       </Switch>
     );

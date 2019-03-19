@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Header.scss';
 import ReactGA from 'react-ga';
+import { NavLink } from 'react-router-dom'
 
 import SelectBox from '../shared/SelectBox/SelectBox';
 
@@ -34,9 +35,9 @@ class Header extends Component {
         return (
             <nav style={{ position: this.props.position }}>
                 <div className="container">
-                    <div className="left">
+                    <NavLink to="/" className="left" onClick={() => window.scrollTo(0, 0)}>
                         <img id="logo" src='/img/Logo.svg' alt="Logo" />
-                    </div>
+                    </NavLink>
                     <div className="middle">
                         <SelectBox 
                         options={[
@@ -103,7 +104,8 @@ class Header extends Component {
                         ]}
                         isSearchable
                         width= '130px'
-                        placeholder="Languages" />
+                        placeholder="Languages"
+                        />
                         <img id="search" src="/img/search.svg" alt="Search" />
                         <img id="menu" src="/img/menu.svg" alt="Menu" />
                     </div>
