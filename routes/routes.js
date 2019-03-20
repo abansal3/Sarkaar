@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const SubscriptionController = require('../controllers/SubscriptionController');
+const EngagementController = require('../controllers/EngagementController');
 
 // User routes
-router.post('/users/subscribe', SubscriptionController.subscribeUserToMailingList);
-router.get('/hi', SubscriptionController.hi);
+router.post('/users/subscribe', EngagementController.subscribeUserToMailingList);
+router.post('/users/sendEmail', EngagementController.sendContactUsEmail);
 
 module.exports = router;

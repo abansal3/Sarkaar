@@ -30,12 +30,14 @@ class HomePage extends Component {
             contactUsModal: {
                 email: '',
                 subject: '',
-                body: ''
+                body: '',
+                submitted: false
             }
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.submitEmail = this.submitEmail.bind(this);
+        this.sendContactUsEmail = this.sendContactUsEmail.bind(this);
 
         this.handleScroll = this.handleScroll.bind(this);
         this.navigateToSection = this.navigateToSection.bind(this);
@@ -126,6 +128,8 @@ class HomePage extends Component {
         }
     }
 
+    // Get Started Modal
+
     submitEmail () {
         ReactGA.event({
             category: 'User',
@@ -144,7 +148,7 @@ class HomePage extends Component {
         });
     }
 
-    checkIfAlreadySignedUp() {
+    renderGetStartedModal() {
         if(this.cookies.get('emailSubmitted') == 'true') {
             return (
                 <div className="container">
@@ -173,7 +177,63 @@ class HomePage extends Component {
                 </div>
             )
         }
-        
+    }
+
+    // Contact Us Modal
+
+    sendContactUsEmail() {
+        let contactUsModal = this.state.contactUsModal;
+        contactUsModal.submitted = true;
+
+        ReactGA.event({
+            category: 'User',
+            action: 'Contacted Us',
+            label: 'Contact Us Modal'
+        });
+
+        axios({
+            method: 'post',
+            url: '/api/users/sendEmail',
+            data: {
+                email: contactUsModal.email,
+                subject: contactUsModal.subject,
+                body: contactUsModal.body
+            }
+        }).then(response => {
+            console.log(response);
+            this.setState({ contactUsModal });
+        });
+    }
+
+    renderContactUsModal() {
+        if(this.state.contactUsModal.submitted) {
+            return (
+                <div className="container">
+                    <h3>Thanks for reaching out!</h3>
+                    <img className="modal-content-image" src="/img/email.svg" />
+                    <p>We'll get back to you as soon as we can.<br></br>In the meantime, help us spread the word:</p>
+                    <div id="modal-share-container">
+                        <img className="modal-share-icon" src="/img/f-2.svg" />
+                        <img className="modal-share-icon" src="/img/bird-2.svg" />
+                        <img className="modal-share-icon" src="/img/mail-2.svg" />
+                        <img className="modal-share-icon" src="/img/slack-2.svg" />
+                        <img className="modal-share-icon" src="/img/whatsapp.svg" />
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className="container">
+                    <h3>Tell us what you think</h3>
+                    <div id="modal-contact-us-form-container">
+                        <input id="contact-us-email" placeholder="Your Email" className="input" value={this.state.contactUsModal.email} onChange={(event) => this.handleChange(event, 'contactUs','email')} />
+                        <input id="contact-us-subject" placeholder="Subject" className="input" value={this.state.contactUsModal.subject} onChange={(event) => this.handleChange(event, 'contactUs','subject')} />
+                        <textarea value={this.state.contactUsModal.body} onChange={(event) => this.handleChange(event, 'contactUs','body')} />
+                        <Button id="contact-us-submit" text="Submit" className="filled-button" onClick={this.sendContactUsEmail} />
+                    </div>
+                </div>
+            )
+        }
     }
 
     /*
@@ -225,7 +285,7 @@ class HomePage extends Component {
                     overlayClassName="modal-overlay"
                     >
                     <img className="modal-close-button" src="/img/x.svg" onClick={() => this.closeModal('getStarted')} />
-                    {this.checkIfAlreadySignedUp()}
+                    {this.renderGetStartedModal()}
                 </Modal>
                 <Modal
                     isOpen={this.state.modalIsOpen.contactUs}
@@ -236,15 +296,7 @@ class HomePage extends Component {
                     overlayClassName="modal-overlay"
                     >
                         <img className="modal-close-button" src="/img/x.svg" onClick={() => this.closeModal('contactUs')} />
-                        <div className="container">
-                            <h3>Tell us what you think</h3>
-                            <div id="modal-contact-us-form-container">
-                                <input id="contact-us-email" placeholder="Your Email" className="input" value={this.state.contactUsModal.email} onChange={(event) => this.handleChange(event, 'contactUs','email')} />
-                                <input id="contact-us-subject" placeholder="Subject" className="input" value={this.state.contactUsModal.subject} onChange={(event) => this.handleChange(event, 'contactUs','subject')} />
-                                <textarea value={this.state.contactUsModal.body} onChange={(event) => this.handleChange(event, 'contactUs','body')} />
-                                <Button id="contact-us-submit" text="Submit" className="filled-button" onClick={this.submitEmail} />
-                            </div>
-                        </div>
+                        {this.renderContactUsModal()}
                 </Modal>
                 <section id="landing">
                     <div className="container">
