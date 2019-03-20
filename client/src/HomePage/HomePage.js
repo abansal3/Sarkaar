@@ -301,7 +301,7 @@ class HomePage extends Component {
                 <section id="landing">
                     <div className="container">
                         <div id="landing-text">
-                            <h1>Bharat is growing. We need to keep up.</h1>
+                            <h1>India is growing. We need to keep up.</h1>
                             <Button text="Get Started" className="primary-button" onClick={() => this.openModal('getStarted')} />
                         </div>
                         <div id="landing-graphic">
@@ -403,10 +403,10 @@ class HomePage extends Component {
                                 <div>
                                     <Button id="contact-us-button" text="Contact Us" className="secondary-button" onClick={() => this.openModal('contactUs')}/>
                                     <OutboundLink
-                                    eventLabel="Explore Github Button"
-                                    to="https://github.com/abansal3/Sarkaar"
+                                    eventLabel="Explore Roadmap Button"
+                                    to="https://trello.com/invite/b/Z9OA47nO/f943e82869667cda0f7f402d611f83fc/sarkaar"
                                     target="_blank">
-                                        <Button id="github-button" text="Explore GitHub" className="secondary-button"/>
+                                        <Button id="roadmap-button" text="Explore Roadmap" className="secondary-button"/>
                                     </OutboundLink>
                                 </div>
                             </div>
