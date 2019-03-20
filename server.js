@@ -6,7 +6,10 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const routes = require('./routes/routes');
+
 // API calls
+app.use('/api', routes);
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
