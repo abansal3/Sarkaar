@@ -126,12 +126,21 @@ class HomePage extends Component {
         }
     }
 
-    submitEmail() {
-        this.cookies.set('emailSubmitted', true);
+    submitEmail () {
         ReactGA.event({
             category: 'User',
             action: 'Submitted email',
             label: 'Get Started Modal'
+        });
+        axios({
+            method: 'post',
+            url: '/api/users/subscribe',
+            data: {
+                email: this.state.getStartedModal.email
+            }
+        }).then(response => {
+            console.log(response);
+            this.cookies.set('emailSubmitted', true);
         });
     }
 
