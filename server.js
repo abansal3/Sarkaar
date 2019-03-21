@@ -15,8 +15,6 @@ app.use('/api', routes);
 //   res.send('Hello')
 // });
 
-console.log(process.env)
-
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
