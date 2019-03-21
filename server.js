@@ -11,10 +11,6 @@ const routes = require('./routes/routes');
 // API calls
 app.use('/api', routes);
 
-// app.get('/', function(req, res) {
-//   res.send('Hello')
-// });
-
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
