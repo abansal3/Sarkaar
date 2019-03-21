@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: visible;
+}
+
+.container {
+    max-height: 800px;
+    max-width: 1024px;
+}
+
+input {
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #E0E7EE;
+    width: 100%;
+    text-indent: 10px;
+    outline: none;
+    box-sizing: border-box;
+
+    &::placeholder {
+        font-family: europa;
+        font-weight: 200;
+        font-size: 15px;
+        color: rgba(68,88,112,0.5);
+    }
+}
+
+textarea {
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #E0E7EE;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    box-sizing: border-box;
+}
