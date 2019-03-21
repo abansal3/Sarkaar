@@ -9,15 +9,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const routes = require('./routes/routes');
 
 // API calls
-app.use('/api', routes);
+// app.use('/api', routes);
 
-if (process.env.NODE_ENV === 'production') {
-  // Serve any static files
-  app.use(express.static(path.join(__dirname, 'client/build')));
-  // Handle React routing, return all requests to React app
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  });
-}
+app.get('/', function(req, res) {
+  res.send('Hello')
+});
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+// if (process.env.NODE_ENV === 'production') {
+//   // Serve any static files
+//   app.use(express.static(path.join(__dirname, 'client/build')));
+//   // Handle React routing, return all requests to React app
+//   app.get('*', function(req, res) {
+//     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+//   });
+// }
+
+app.listen(port, () => console.log(`Listening currently on port ${port}`));
