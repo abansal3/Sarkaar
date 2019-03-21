@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const routes = require('./routes/routes');
 
-API calls
+// API calls
 app.use('/api', routes);
 
 // app.get('/', function(req, res) {
