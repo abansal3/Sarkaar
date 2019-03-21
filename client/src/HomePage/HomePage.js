@@ -19,7 +19,6 @@ class HomePage extends Component {
         
         this.state = {
             secondaryNav: [true, false, false],
-            headerPosition: 'sticky',
             modalIsOpen: {
                 getStarted: false,
                 contactUs: false
@@ -251,7 +250,7 @@ class HomePage extends Component {
         if (scrollPosition >= WhatIsThisSection && scrollPosition < WhyDoWeNeedThisSection) {
             let secondaryNav = [false, false, false];
             secondaryNav[0] = true;
-            this.setState({ secondaryNav, headerPosition: 'fixed' });
+            this.setState({ secondaryNav });
         } else if (scrollPosition >= WhyDoWeNeedThisSection && scrollPosition < HowDoesThisWork) {
             let secondaryNav = [false, false, false];
             secondaryNav[1] = true;
@@ -261,7 +260,7 @@ class HomePage extends Component {
             secondaryNav[2] = true;
             this.setState({ secondaryNav });
         } else if (scrollPosition < WhatIsThisSection) {
-            this.setState({ headerPosition: 'sticky' });
+            //
         }
     }
 
@@ -275,7 +274,7 @@ class HomePage extends Component {
     render() {
         return (
             <div>
-                <Header position={this.state.headerPosition} />
+                <Header />
                 <Modal
                     isOpen={this.state.modalIsOpen.getStarted}
                     onAfterOpen={this.afterOpenModal}
@@ -331,7 +330,7 @@ class HomePage extends Component {
                             </ul>
                         </div>
                     </div>
-                    <div id="what-is-this" className="content" ref='0' style={{ paddingTop: this.state.headerPosition == 'fixed' ? '10vh' : '0' }}>
+                    <div id="what-is-this" className="content" ref='0'>
                         <div className="container">
                             <div className="content-image">
                                 <img src='/img/dashboard.svg' />
@@ -341,11 +340,7 @@ class HomePage extends Component {
                                 Sarkaar is a <b>data driven dashboard for the world’s largest democracy</b>. We aim to provide <b>transparency</b>, <b>information</b> and <b>macro level insight</b> to enable an educated electorate of the 21st Century.
                                 </p>
                                 <p>
-                                The platform is primarily structured around two aspects:
-                                    <ul>
-                                        <li>Topics</li> 
-                                        <li>Location</li> 
-                                    </ul>
+                                The platform is primarily structured around two aspects: topics and locations. You can pick a topic, a location or both and dive deep into the political realities of the Indian society.
                                 </p>
                             </div>
                         </div>
@@ -361,10 +356,10 @@ class HomePage extends Component {
                         <div className="container">
                             <div className="content-text">
                                 <p>
-                                We’re living through a revolutionary time in the timescale of human evolution. Information today is everywhere and nowhere at the same time. But even with all the information out there, there simply isn’t a digestible structure for everyone to make sense of their surrounding. 
+                                We’re living through a revolutionary time in the timescale of <b>human evolution</b>. Information today is everywhere and nowhere at the same time. But even with all the <b>information</b> out there, there simply isn’t a <b>digestible</b> structure for everyone to make sense of their surrounding. 
                                 </p>
                                 <p>
-                                This has led to uninformed voters around the world. For India to build upon a stable democracy, information must be both accessible and digestible. 
+                                This has led to <b>uninformed voters</b> around the world. For India to build upon a <b>stable democracy</b>, information must be both <b>accessible</b> and <b>digestible</b>. 
                                 </p>
                                 <OutboundLink
                                 eventLabel="Read More Button"
@@ -395,7 +390,7 @@ class HomePage extends Component {
                                 Collaboration has been key to some of the greatest human achievements. We are no different.
                                 </p>
                                 <p>
-                                Sarkaar is built and managed by a passionate group of technologists, political enthusiasts and proud citizens of India. The project is open source and we welcome all contributions.
+                                Sarkaar is built and managed by a <b>passionate</b> group of technologists, political enthusiasts and proud citizens of India. The project is <b>open source</b> and we welcome all contributions.
                                 </p>
                                 <p>
                                 Interested in helping?

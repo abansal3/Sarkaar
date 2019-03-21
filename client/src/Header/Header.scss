@@ -8,6 +8,7 @@ nav {
     justify-items: center;
     top: 0;
     background: white;
+    position: fixed;
     z-index: 2;
 
     div.container {
@@ -15,6 +16,7 @@ nav {
         height: 100%;
         margin: auto;
         display: flex;
+        justify-content: space-between;
 
         .left, .middle, .right {
             width: 33%;

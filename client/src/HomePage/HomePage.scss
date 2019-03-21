@@ -146,6 +146,7 @@
 
 section#landing {
     height: 80vh;
+    padding-top: 10vh;
     max-height: 800px;
     background-image: url('/img/red_fort.svg');
     background-position: bottom;
@@ -388,7 +389,7 @@ footer {
 
 @media screen and (max-width: 800px) {
     div.middle {
-        visibility: hidden;
+        display: none !important;
     }
 
     div.right {
@@ -399,6 +400,14 @@ footer {
 
     .modal-content {
         width: 80%;
+
+        .container {
+            text-align: center;
+        }
+    }
+
+    div#modal-email-form-container {
+        width: 100% !important;
     }
 
     img#logo {
