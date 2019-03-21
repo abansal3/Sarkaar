@@ -388,16 +388,6 @@ footer {
 }
 
 @media screen and (max-width: 800px) {
-    div.middle {
-        display: none !important;
-    }
-
-    div.right {
-        div.select {
-            visibility: hidden;
-        }
-    }
-
     .modal-content {
         width: 80%;
 
@@ -495,7 +485,17 @@ footer {
         font-size: 3.5vw !important;
     }
 
-    nav, #secondary-nav {
-        position: -webkit-sticky !important;
+    .left {
+        width: auto !important;
+    }
+
+    div.middle {
+        display: none !important;
+    }
+
+    div.right {
+        div.select {
+            visibility: hidden;
+        }
     }
 }
