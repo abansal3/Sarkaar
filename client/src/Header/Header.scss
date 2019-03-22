@@ -1,4 +1,4 @@
-nav {
+nav#top-nav {
     height: 10vh;
     width: 100%;
     border-bottom: 1px solid #EAEAEA;
@@ -53,6 +53,10 @@ nav {
 
             img {
                 width: 18px;
+
+                &:hover {
+                    cursor: pointer;
+                }
             }
 
             img#search {

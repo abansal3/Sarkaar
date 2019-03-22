@@ -7,6 +7,7 @@ import './HomePage.scss';
 
 import Header from '../Header/Header';
 import Button from '../shared/Button/Button';
+import Footer from '../Footer/Footer';
 
 Modal.setAppElement('#root');
 
@@ -155,11 +156,30 @@ class HomePage extends Component {
                     <img className="modal-content-image" src="/img/development.svg" />
                     <p>In the meantime, help us spread the word:</p>
                     <div id="modal-share-container">
-                        <img className="modal-share-icon" src="/img/f-2.svg" />
-                        <img className="modal-share-icon" src="/img/bird-2.svg" />
-                        <img className="modal-share-icon" src="/img/mail-2.svg" />
-                        <img className="modal-share-icon" src="/img/slack-2.svg" />
-                        <img className="modal-share-icon" src="/img/whatsapp.svg" />
+                        <OutboundLink
+                        eventLabel="Facebook Share - Modal"
+                        to="https://www.facebook.com/sharer/sharer.php?u=https%3A//sarkaar.io"
+                        target="_blank">
+                            <img className="modal-share-icon" src="/img/f-2.svg" />
+                        </OutboundLink>
+                        <OutboundLink
+                        eventLabel="Twitter Share - Modal"
+                        to={"https://twitter.com/intent/tweet?text=" + encodeURI("Check out the world's first data driven dashboard for democracy") + "&url=https://sarkaar.io&hashtags=india,politics,dashboard"}
+                        target="_blank">
+                            <img className="modal-share-icon" src="/img/bird-2.svg" />
+                        </OutboundLink>
+                        <OutboundLink
+                        eventLabel="Email Share - Modal"
+                        to="mailto:?&subject=Check this out!&body=Check%20out%20the%20world's%20first%20data%20driven%20dashboard%20for%20democracy%0A%0Ahttps%3A//sarkaar.io"
+                        >
+                            <img className="modal-share-icon" src="/img/mail-2.svg" />
+                        </OutboundLink>
+                        <OutboundLink
+                        eventLabel="Whatsapp Share - Modal"
+                        to="whatsapp://send?text=Check out the world's first data driven dashboard for democracy https://sarkaar.io"
+                        target="_blank">
+                            <img className="modal-share-icon" src="/img/whatsapp-2.svg" />
+                        </OutboundLink>
                     </div>
                 </div>
             )
@@ -212,11 +232,30 @@ class HomePage extends Component {
                     <img className="modal-content-image" src="/img/email.svg" />
                     <p>We'll get back to you as soon as we can.<br></br>In the meantime, help us spread the word:</p>
                     <div id="modal-share-container">
-                        <img className="modal-share-icon" src="/img/f-2.svg" />
-                        <img className="modal-share-icon" src="/img/bird-2.svg" />
-                        <img className="modal-share-icon" src="/img/mail-2.svg" />
-                        <img className="modal-share-icon" src="/img/slack-2.svg" />
-                        <img className="modal-share-icon" src="/img/whatsapp.svg" />
+                        <OutboundLink
+                        eventLabel="Facebook Share - Modal"
+                        to="https://www.facebook.com/sharer/sharer.php?u=https%3A//sarkaar.io"
+                        target="_blank">
+                            <img className="modal-share-icon" src="/img/f-2.svg" />
+                        </OutboundLink>
+                        <OutboundLink
+                        eventLabel="Twitter Share - Modal"
+                        to={"https://twitter.com/intent/tweet?text=" + encodeURI("Check out the world's first data driven dashboard for democracy") + "&url=https://sarkaar.io&hashtags=india,politics,dashboard"}
+                        target="_blank">
+                            <img className="modal-share-icon" src="/img/bird-2.svg" />
+                        </OutboundLink>
+                        <OutboundLink
+                        eventLabel="Email Share - Modal"
+                        to="mailto:?&subject=Check this out!&body=Check%20out%20the%20world's%20first%20data%20driven%20dashboard%20for%20democracy%0A%0Ahttps%3A//sarkaar.io"
+                        >
+                            <img className="modal-share-icon" src="/img/mail-2.svg" />
+                        </OutboundLink>
+                        <OutboundLink
+                        eventLabel="Whatsapp Share - Modal"
+                        to="whatsapp://send?text=Check out the world's first data driven dashboard for democracy https://sarkaar.io"
+                        target="_blank">
+                            <img className="modal-share-icon" src="/img/whatsapp-2.svg" />
+                        </OutboundLink>
                     </div>
                 </div>
             )
@@ -408,51 +447,7 @@ class HomePage extends Component {
                         </div>
                     </div>
                 </section>
-                <footer>
-                    <img id="india-1" src="/img/india-1.svg" />
-                    <img id="india-2" src="/img/india-2.svg" />
-                    <div className="container">
-                        <div className="footer-table">
-                            <div className="footer-table-column">
-                                <h4>PROJECT</h4>
-                                <ul>
-                                    <li>About</li>
-                                    <li>Blog</li>
-                                    <li>In The News</li>
-                                    <li>Github</li>
-                                </ul>
-                            </div>
-                            <div className="footer-table-column">
-                                <h4>TOPICS</h4>
-                                <ul>
-                                    <li>Government Structure</li>
-                                    <li>Election Cycles</li>
-                                    <li>Political Parties</li>
-                                    <li>Macro Trends</li>
-                                </ul>
-                            </div>
-                            <div className="footer-table-row">
-                                <div>
-                                    <h4>MISC</h4>
-                                    <ul>
-                                        <li>Site Map</li>
-                                        <li>Legal &amp; Privacy</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4>SHARE</h4>
-                                    <ul>
-                                        <li><img src="/img/f.svg" /></li>
-                                        <li><img src="/img/bird.svg" /></li>
-                                        <li><img src="/img/slack.svg" /></li>
-                                        <li><img src="/img/mail.svg" /></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <p>© 2019 Sarkaar.io</p>
-                    </div>
-                </footer>
+                <Footer />
             </div>
         );
     }

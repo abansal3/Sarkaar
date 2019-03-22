@@ -1,16 +1,24 @@
 import React, {Component} from 'react';
 import './Header.scss';
 import ReactGA from 'react-ga';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
+import Sidebar from './Sidebar';
 import SelectBox from '../shared/SelectBox/SelectBox';
 
 class Header extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            isMenuOpen: false
+        }
+
         this.handleTopicSelect = this.handleTopicSelect.bind(this);
         this.handleLocationSelect = this.handleLocationSelect.bind(this);
+        this.handleLanguageSelect = this.handleLanguageSelect.bind(this);
+
+        this.toggleMenu = this.toggleMenu.bind(this);
     }
 
     handleTopicSelect(selectedOption) {
@@ -30,14 +38,30 @@ class Header extends Component {
             label: selectedOption.label
         });
     }
+
+    handleLanguageSelect(selectedOption) {
+        console.log("Language selected:", selectedOption.label)
+        ReactGA.event({
+            category: 'Language',
+            action: 'Language Selected',
+            label: selectedOption.label
+        });
+    }
     
+    toggleMenu() {
+        let isMenuOpen = !this.state.isMenuOpen;
+        // this.setState({ isMenuOpen });
+    }
+
     render () {
         return (
-            <nav style={{ position: this.props.position }}>
+            <nav id="top-nav" style={{ position: this.props.position }}>
                 <div className="container">
-                    <NavLink to="/" className="left" onClick={() => window.scrollTo(0, 0)}>
-                        <img id="logo" src='/img/Logo.svg' alt="Logo" />
-                    </NavLink>
+                    <div className="left">
+                        <NavLink to="/" onClick={() => window.scrollTo(0, 0)}>
+                            <img id="logo" src='/img/Logo.svg' alt="Logo" />
+                        </NavLink>
+                    </div>
                     <div className="middle">
                         <SelectBox 
                         options={[
@@ -105,11 +129,15 @@ class Header extends Component {
                         isSearchable
                         width= '130px'
                         placeholder="Languages"
+                        selectedOption={this.handleLanguageSelect}
                         />
                         <img id="search" src="/img/search.svg" alt="Search" />
-                        <img id="menu" src="/img/menu.svg" alt="Menu" />
+                        <img id="menu" src="/img/menu.svg" alt="Menu" onClick={this.toggleMenu} />
                     </div>
                 </div>
+                <Sidebar isMenuOpen={this.state.isMenuOpen} stateChange={(state) => {
+                    this.setState({ isMenuOpen: state.isOpen});
+                }} />
             </nav>
         )
     }
