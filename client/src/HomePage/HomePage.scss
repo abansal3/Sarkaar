@@ -302,7 +302,8 @@ section#main-content {
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 850px) {
+
     .modal-content {
         width: 80%;
         height: 60%;
@@ -367,18 +368,15 @@ section#main-content {
     #secondary-nav span {
         font-size: 3.5vw !important;
     }
+}
 
-    .left {
-        width: auto !important;
+@media screen and (min-width: 500px) and (max-width: 850px) {
+    section#landing {
+        height: 75vh;
     }
 
-    div.middle {
-        display: none !important;
-    }
-
-    div.right {
-        div.select {
-            visibility: hidden;
-        }
+    #secondary-nav {
+        height: 15vh !important;
+        top: 20vh !important;
     }
 }

@@ -66,3 +66,33 @@ nav#top-nav {
         }
     }
 }
+
+@media screen and (max-width: 850px) {
+    .left {
+        width: auto !important;
+    }
+
+    div.middle {
+        display: none !important;
+    }
+
+    div.right {
+        div.select {
+            visibility: hidden;
+        }
+    }
+}
+
+@media screen and (min-width: 500px) and (max-width: 850px) {
+    nav#top-nav {
+        height: 20vh;
+    }
+
+    #landing-text {
+        height: 100% !important;
+    }
+
+    #landing {
+        background: none !important;
+    }
+}
