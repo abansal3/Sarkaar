@@ -25,7 +25,7 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path='/' render={() => (<HomePage cookies={this.props.cookies}/>)} />
-        {/* <Route exact path='/overview' render={() => (<Overview cookies={this.props.cookies}/>)} /> */}
+        <Route exact path='/overview' render={() => (<Overview cookies={this.props.cookies}/>)} />
         <Redirect from='*' to='/' />
       </Switch>
     );
